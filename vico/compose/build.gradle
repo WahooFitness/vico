@@ -35,36 +35,6 @@ android {
 
     namespace = getNamespace(project)
     group = library.groupId
-
-    publishing {
-
-        singleVariant("release") {
-            withSourcesJar()
-            withJavadocJar()
-        }
-    }
-}
-
-afterEvaluate {
-
-    publishing {
-
-        publications {
-
-            VicoCompose(MavenPublication) {
-
-                groupId = library.groupId
-                artifactId = getArtifactId(project)
-                version = project.version
-                from components.release
-
-                customizePom(pom)
-                setUpRepositories(repositories)
-            }
-        }
-    }
-
-    setUpSigning(signing, publishing.publications.VicoCompose)
 }
 
 dependencies {
@@ -78,3 +48,5 @@ dependencies {
     implementation libs.kotlinStdLib
     testImplementation libs.kotlinTest
 }
+
+apply from: 'publish.gradle'
