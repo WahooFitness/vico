@@ -38,10 +38,9 @@ afterEvaluate {
                 pom.withXml {
                     Node pomNode = asNode()
                     pomNode.dependencies.'*'.findAll() {
-                        boolean isGroupIsOk = it.groupId.text() != null && it.groupId.text() != 'com.wahoofitness.android'
                         boolean isArtifactIdOk = it.artifactId.text() != null && it.groupId.text() != 'unspecified'
                         boolean isVersionOk = it.version.text() != null && it.version.text() != 'unspecified'
-                        !isGroupIsOk || !isArtifactIdOk || !isVersionOk
+                        !isArtifactIdOk || !isVersionOk
                     }.each() {
                         it.parent().remove(it)
                     }
