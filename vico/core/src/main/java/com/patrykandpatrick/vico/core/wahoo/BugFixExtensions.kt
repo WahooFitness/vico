@@ -16,4 +16,4 @@
 
 package com.patrykandpatrick.vico.core.wahoo
 
-public fun Float.setNaNto1(): Float = if (this.isNaN()) 1.0f else this
+public fun Float.setNaNto0(): Float = if (this.isNaN()) 0.0f else this
