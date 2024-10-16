@@ -22,40 +22,8 @@ plugins {
 apply from: "$rootDir/common-scripts.gradle"
 
 android {
-
     namespace = getNamespace(project)
     group = library.groupId
-
-    publishing {
-
-        singleVariant("release") {
-
-            withSourcesJar()
-            withJavadocJar()
-        }
-    }
-}
-
-afterEvaluate {
-
-    publishing {
-
-        publications {
-
-            VicoCore(MavenPublication) {
-
-                groupId = library.groupId
-                artifactId = getArtifactId(project)
-                version = project.version
-                from components.release
-
-                customizePom(pom)
-                setUpRepositories(repositories)
-            }
-        }
-    }
-
-    setUpSigning(signing, publishing.publications.VicoCore)
 }
 
 dependencies {
@@ -69,3 +37,5 @@ dependencies {
     testImplementation libs.mockK
     testImplementation libs.testCore
 }
+
+apply from: 'publish.gradle'

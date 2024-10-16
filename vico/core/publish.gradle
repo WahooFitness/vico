@@ -25,12 +25,12 @@ afterEvaluate {
                 from components.release
 
                 groupId 'com.wahoofitness.android'
-                artifactId 'vico'
+                artifactId 'vico-core'
                 version project.properties["versionNameArg"] ?: project.version
 
                 pom {
-                    name = 'Vico Graph Library'
-                    description = 'Vico graph library'
+                    name = 'Vico-Core Graph Library'
+                    description = 'Vico-Core graph library'
                     url = 'http://github.com/WahooFitness/vico'
                 }
 
@@ -38,10 +38,9 @@ afterEvaluate {
                 pom.withXml {
                     Node pomNode = asNode()
                     pomNode.dependencies.'*'.findAll() {
-                        boolean isGroupIsOk = it.groupId.text() != null && it.groupId.text() != 'com.patrykandpatrick.vico.core'
                         boolean isArtifactIdOk = it.artifactId.text() != null && it.groupId.text() != 'unspecified'
                         boolean isVersionOk = it.version.text() != null && it.version.text() != 'unspecified'
-                        !isGroupIsOk || !isArtifactIdOk || !isVersionOk
+                        !isArtifactIdOk || !isVersionOk
                     }.each() {
                         it.parent().remove(it)
                     }
