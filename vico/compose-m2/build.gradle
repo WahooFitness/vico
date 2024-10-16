@@ -35,35 +35,6 @@ android {
 
     namespace = getNamespace(project)
     group = library.groupId
-
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-            withJavadocJar()
-        }
-    }
-}
-
-afterEvaluate {
-
-    publishing {
-
-        publications {
-
-            VicoComposeM2(MavenPublication) {
-
-                groupId = library.groupId
-                artifactId = getArtifactId(project)
-                version = project.version
-                from components.release
-
-                customizePom(pom)
-                setUpRepositories(repositories)
-            }
-        }
-    }
-
-    setUpSigning(signing, publishing.publications.VicoComposeM2)
 }
 
 dependencies {

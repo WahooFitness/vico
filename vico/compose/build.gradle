@@ -39,7 +39,7 @@ android {
 
 dependencies {
 
-    api project(":vico:core")
+    implementation project(":vico:core")
     implementation platform(libs.composeBom)
     implementation libs.androidXCore
     implementation libs.appcompat
