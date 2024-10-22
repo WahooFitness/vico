@@ -22,6 +22,7 @@ import com.patrykandpatrick.vico.core.cartesian.HorizontalDimensions
 import com.patrykandpatrick.vico.core.cartesian.data.CartesianChartRanges
 import com.patrykandpatrick.vico.core.common.half
 import com.patrykandpatrick.vico.core.common.roundedToNearest
+import com.patrykandpatrick.vico.core.wahoo.getVerticalGuidelineValues
 import kotlin.math.ceil
 import kotlin.math.floor
 
@@ -36,7 +37,9 @@ private val CartesianChartRanges.measuredLabelValues
     if (xLength >= 2 * xStep) add(minX + xStep * (xLength.half / xStep).roundedToNearest)
   }
 
-private fun CartesianDrawingContext.getLabelValues(
+// ----------------------- WAHOO START --------------------------
+
+/* private fun CartesianDrawingContext.getLabelValues(
   visibleXRange: ClosedFloatingPointRange<Double>,
   fullXRange: ClosedFloatingPointRange<Double>,
   offset: Int = 0,
@@ -62,7 +65,9 @@ private fun CartesianDrawingContext.getLabelValues(
     }
   }
   return values
-}
+} */
+
+// ----------------------- WAHOO END --------------------------
 
 internal abstract class BaseHorizontalAxisItemPlacer(private val shiftExtremeLines: Boolean) :
   HorizontalAxis.ItemPlacer {
@@ -97,24 +102,14 @@ internal class AlignedHorizontalAxisItemPlacer(
       null
     }
 
+
+  //Changed by Wahoo
   override fun getLabelValues(
     context: CartesianDrawingContext,
     visibleXRange: ClosedFloatingPointRange<Double>,
     fullXRange: ClosedFloatingPointRange<Double>,
     maxLabelWidth: Float,
-  ) =
-    context.getLabelValues(
-      visibleXRange = visibleXRange,
-      fullXRange = fullXRange,
-      offset = offset,
-      spacing =
-        spacing *
-          if (addExtremeLabelPadding) {
-            ceil(maxLabelWidth / (context.horizontalDimensions.xSpacing * spacing)).toInt()
-          } else {
-            1
-          },
-    )
+  ) = context.getVerticalGuidelineValues(visibleXRange = visibleXRange)
 
   override fun getWidthMeasurementLabelValues(
     context: CartesianMeasuringContext,
@@ -145,12 +140,14 @@ internal class AlignedHorizontalAxisItemPlacer(
 
 internal class SegmentedHorizontalAxisItemPlacer(private val shiftExtremeLines: Boolean) :
   BaseHorizontalAxisItemPlacer(shiftExtremeLines) {
+
+  //Changed by Wahoo
   override fun getLabelValues(
     context: CartesianDrawingContext,
     visibleXRange: ClosedFloatingPointRange<Double>,
     fullXRange: ClosedFloatingPointRange<Double>,
     maxLabelWidth: Float,
-  ) = context.getLabelValues(visibleXRange, fullXRange)
+  ) = context.getVerticalGuidelineValues(visibleXRange)
 
   override fun getWidthMeasurementLabelValues(
     context: CartesianMeasuringContext,

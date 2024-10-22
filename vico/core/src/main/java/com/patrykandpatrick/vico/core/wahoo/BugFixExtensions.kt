@@ -16,4 +16,18 @@
 
 package com.patrykandpatrick.vico.core.wahoo
 
+import com.patrykandpatrick.vico.core.cartesian.CartesianDrawingContext
+import com.patrykandpatrick.vico.core.common.length
+
 public fun Float.setNaNto0(): Float = if (this.isNaN()) 0.0f else this
+
+public fun CartesianDrawingContext.getVerticalGuidelineValues(
+  visibleXRange: ClosedFloatingPointRange<Double>
+): List<Double> {
+  val quarterLength = visibleXRange.length / 4
+  val guideline1 = visibleXRange.start + quarterLength
+  val guideline2 = visibleXRange.start + (quarterLength * 2)
+  val guideline3 = visibleXRange.start + (quarterLength * 3)
+
+  return listOf(guideline1, guideline2, guideline3)
+}
