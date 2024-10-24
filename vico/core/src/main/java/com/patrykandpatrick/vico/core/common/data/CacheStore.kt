@@ -16,6 +16,8 @@
 
 package com.patrykandpatrick.vico.core.common.data
 
+import android.util.Log
+
 /** Caches data. */
 public class CacheStore {
   private var map = mutableMapOf<String, Any>()
@@ -26,6 +28,9 @@ public class CacheStore {
    * the given components. If there’s no such value, `null` is returned.
    */
   public fun <T : Any> getOrNull(keyNamespace: KeyNamespace, vararg keyComponents: Any?): T? {
+    Log.e("JBIRD", "keyName: $keyNamespace")
+    Log.e("JBIRD", "keySize: " + keyComponents.size.toString())
+    Log.e("JBIRD", "keyComponents: $keyComponents")
     val key = keyNamespace.getKey(*keyComponents)
     val value = map[key]
     if (value != null) purgedMap[key] = value
