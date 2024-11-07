@@ -37,15 +37,23 @@ internal data class SingleLineFill(val fill: Fill) : LineCartesianLayer.LineFill
     verticalAxisPosition: Axis.Position.Vertical?,
   ) {
     with(context) {
-      paint.shader =
+      // ----- WAHOO START -----
+      /*paint.shader =
         fill.shader?.provideShader(
           this,
           layerBounds.left,
           layerBounds.top,
           layerBounds.right,
           layerBounds.bottom,
-        )
-      canvas.drawPaint(paint)
+        ) */
+      canvas.drawRect(
+        layerBounds.left,
+        layerBounds.top,
+        layerBounds.right,
+        layerBounds.bottom,
+        paint
+      )
+      // ----- WAHOO END -----
     }
   }
 }
