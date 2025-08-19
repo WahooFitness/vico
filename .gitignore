@@ -3,7 +3,7 @@
 # To keep everything consistent, please update
 #    $WAHOO_ANDROID_HOME/android_gradle/settings/gitignore.master.txt
 # and run
-#    find $WAHOO_ANDROID_HOME -mindepth 1 -maxdepth 1 -type d | grep -v 'crux\|comwa\|kotlin_common' | while read f; do cp $WAHOO_ANDROID_HOME/android_gradle/settings/gitignore.master.txt $f/.gitignore; done
+#    find $WAHOO_ANDROID_HOME -mindepth 1 -maxdepth 1 -type d | grep -v 'crux\|comwa\|kotlin_common\|wahoo-sensor-management' | while read f; do cp $WAHOO_ANDROID_HOME/android_gradle/settings/gitignore.master.txt $f/.gitignore; done
 # INSPIRED BY https://raw.githubusercontent.com/github/gitignore/master/Android.gitignore
 #
 
@@ -23,6 +23,7 @@
 **/bin/
 **/gen/
 **/out/
+vcs.xml
 #  Uncomment the following line in case you need and you don't have the release build type files in your app
 # **/release/
 
@@ -69,6 +70,8 @@
 **/.idea/git_toolbox_blame.xml
 **/.idea/vcs.xml
 **/.idea/AndroidProjectSystem.xml
+
+.kotlin/
 
 # Keystore files
 # Uncomment the following lines if you do not want to check your keystore files in.
